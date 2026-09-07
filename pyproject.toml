@@ -1,0 +1,15 @@
+[project]
+name = "test-task"
+version = "0.1.0"
+description = "Lets do this"
+readme = "README.md"
+authors = [{ name = "Zeufo", email = "p.yudin.work@gmail.com" }]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.141.1",
+    "loguru>=0.7.3",
+    "pytest>=9.1.1",
+]
+
+[tool.ruff]
+line-length = 100
