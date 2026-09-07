@@ -13,9 +13,11 @@ try:
     load_dotenv(dotenv_path=DOTENV_PATH)
 
     DB_NAME = os.getenv("DB_NAME")
+    MAX_CAPACITY_PER_SLOT = os.getenv("MAX_CAPACITY_PER_SLOT")
 
     required_vars = {
         "DB_NAME": DB_NAME,
+        "MAX_CAPACITY_PER_SLOT": MAX_CAPACITY_PER_SLOT,
     }
 
     DATABASE_URL = f"sqlite+aiosqlite:///{SRC_DIR}/{DB_NAME}"
@@ -24,6 +26,8 @@ try:
         if var_value is None:
             logger.critical(f"{var_name} is not set")
             raise RuntimeError
+
+    MAX_CAPACITY_PER_SLOT = int(MAX_CAPACITY_PER_SLOT)  # type: ignore
 
 except Exception as e:
     logger.critical("cant load dotenv info", e)
