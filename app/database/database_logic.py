@@ -53,7 +53,7 @@ class AsyncBookingCRUD(AsyncDataBaseCRUD):
         return booking
 
     @staticmethod
-    async def get_all_bookings(session: AsyncSession, date: str | None = None) -> typing.Any:
+    async def get_all_bookings(session: AsyncSession, date: date | None = None) -> typing.Any:
         query = select(Booking)
         if date:
             query = query.where(Booking.booking_date == date)

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from loguru import logger
 
 CURRENT_FILE_PATH = Path(__file__).resolve()
-SRC_DIR = next(p for p in CURRENT_FILE_PATH.parents if p.name == "src")
+SRC_DIR = next(p for p in CURRENT_FILE_PATH.parents if p.name == "app")
 DOTENV_PATH = SRC_DIR.parent / ".env"
 
 
