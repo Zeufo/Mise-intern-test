@@ -1,1 +1,1 @@
-from .database_logic import AsyncBookingCRUD, AsyncLocalSession, database_init
+from .database_logic import AsyncBookingCRUD, AsyncLocalSession, count_guests, database_init
