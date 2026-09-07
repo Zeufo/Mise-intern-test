@@ -12,6 +12,7 @@ dependencies = [
   "loguru>=0.7.3",
   "pytest>=9.1.1",
   "sqlalchemy>=2.0.52",
+  "uvicorn>=0.52.4",
 ]
 
 [tool.ruff]

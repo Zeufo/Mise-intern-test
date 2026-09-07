@@ -11,7 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from database.models import Base, Booking
 
 engine = create_async_engine(DATABASE_URL, echo=True)
-AsyncLocalSession = async_sessionmaker(engine)
+AsyncLocalSession = async_sessionmaker(engine, expire_on_commit=False)
 
 
 class AsyncDataBaseCRUD(abc.ABC):
@@ -32,14 +32,18 @@ class AsyncDataBaseCRUD(abc.ABC):
         pass
 
 
-def database_init() -> None:
+async def database_init() -> None:
     try:
         logger.info("Creating tables...")
-        Base.metadata.create_all(engine.sync_engine)
-        logger.info("Tables created")
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+            #
+            logger.info("Tables created")
+            await conn.commit()
+            await conn.close()
 
     except Exception as e:
-        logger.critical("Cant create tables", e)
+        logger.critical(f"Cant create tables: {e}")
 
 
 @typing.final

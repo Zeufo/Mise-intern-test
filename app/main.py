@@ -1,15 +1,17 @@
-import asyncio
+from contextlib import asynccontextmanager
 
-from loguru import logger
-from process import Process
-
-
-async def main() -> None:
-    Process.prepare()
-    await Process.run()
+from api.booking import router
+from core import setup_logger
+from database import database_init
+from fastapi import FastAPI
 
 
-try:
-    asyncio.run(main())
-except KeyboardInterrupt:
-    logger.critical("keyboard interrupt!")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    setup_logger()
+    await database_init()
+    yield
+
+
+app = FastAPI(title="MISE Booking API", lifespan=lifespan)
+app.include_router(router)
