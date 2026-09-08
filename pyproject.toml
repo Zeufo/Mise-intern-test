@@ -6,10 +6,26 @@ readme = "README.md"
 authors = [{ name = "Zeufo", email = "p.yudin.work@gmail.com" }]
 requires-python = ">=3.14"
 dependencies = [
-    "fastapi>=0.141.1",
-    "loguru>=0.7.3",
-    "pytest>=9.1.1",
+  "aiosqlite>=0.22.1",
+  "dotenv>=0.9.9",
+  "fastapi>=0.141.1",
+  "loguru>=0.7.3",
+  "pytest>=9.1.1",
+  "sqlalchemy>=2.0.52",
+  "uvicorn>=0.52.4",
 ]
 
 [tool.ruff]
 line-length = 100
+
+[dependency-groups]
+dev = [
+  "aiosqlite>=0.22.1",
+  "httpx>=0.28.1",
+  "pytest>=9.1.1",
+  "pytest-asyncio>=1.4.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["app"]
+asyncio_mode = "auto"
